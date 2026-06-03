@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import path from "path";
 import notFound from "./middlewares/notFound";
 import errorHandler from "./middlewares/errorHandler";
 import authRoutes from "./routes/auth";
@@ -33,7 +32,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Routes
 app.use("/api/auth", authRoutes);
