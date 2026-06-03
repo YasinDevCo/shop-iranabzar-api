@@ -1,0 +1,74 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# JavaScript/TypeScript - always LF
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# CSS
+*.css text eol=lf
+*.scss text eol=lf
+*.sass text eol=lf
+
+# HTML
+*.html text eol=lf
+
+# SVG
+*.svg text eol=lf
+
+# Markdown
+*.md text eol=lf
+
+# YAML
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Environment files
+.env text eol=lf
+.env.* text eol=lf
+
+# Git files
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Batch files (Windows - must be CRLF)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Images - binary (no EOL conversion)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.bmp binary
+
+# Fonts - binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+
+# Archives - binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.rar binary
+*.7z binary
+
+# Documents - binary
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
