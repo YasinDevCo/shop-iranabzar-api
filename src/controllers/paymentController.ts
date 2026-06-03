@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { PaymentService } from "../services/payment.service";
 import { OrderService } from "../services/order.service";
 import { sendResponse } from "../utils/response";
-import { v4 as uuidv4 } from "uuid";
+import crypto from "crypto";  
 import mongoose from "mongoose";
 
 export class PaymentController {
@@ -47,8 +47,7 @@ export class PaymentController {
         });
       }
 
-      const transactionCode = uuidv4();
-
+      const transactionCode = crypto.randomUUID();
       const payment = await PaymentService.create({
         orderId: new mongoose.Types.ObjectId(orderId),
         userId: new mongoose.Types.ObjectId(userId),
@@ -108,7 +107,7 @@ export class PaymentController {
 
       // به‌روزرسانی وضعیت پرداخت
       await PaymentService.updateStatus(payment._id.toString(), "paid");
-      
+
       // به‌روزرسانی وضعیت سفارش
       if (payment.orderId) {
         await OrderService.updateStatus(payment.orderId.toString(), "paid");
