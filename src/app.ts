@@ -20,18 +20,38 @@ import uploadRoutes from "./routes/upload";
 
 const app = express();
 
-// Middleware
+// لیست آدرس‌های مجاز
+const allowedOrigins = [
+  "http://localhost:4200",
+  "http://localhost:3000",
+  "https://shop-iranabzar-client.vercel.app",
+  "https://shop-iranabzar-api.onrender.com"
+];
+
+// CORS Middleware - تنظیمات کامل
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log(`❌ Blocked origin: ${origin}`);
+        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      }
+    },
     credentials: true,
     exposedHeaders: ["set-cookie"],
-  }),
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Cookie"]
+  })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
-
 
 // Routes
 app.use("/api/auth", authRoutes);
