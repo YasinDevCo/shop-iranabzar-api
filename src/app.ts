@@ -31,24 +31,14 @@ const allowedOrigins = [
 // CORS Middleware - تنظیمات کامل
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.log(`❌ Blocked origin: ${origin}`);
-        callback(new Error(`Origin ${origin} not allowed by CORS`));
-      }
-    },
+    origin: true,
     credentials: true,
     exposedHeaders: ["set-cookie"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Cookie"]
   })
 );
-
+app.options('*', cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
